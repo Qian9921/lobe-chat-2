@@ -1,4 +1,4 @@
-import { JWTPayload, LOBE_CHAT_AUTH_HEADER } from '@/const/auth';
+import { JWTPayload, LOBE_CHAT_AUTH_HEADER as OIL_TUTOR_AUTH_HEADER } from '@/const/auth';
 import { isDeprecatedEdition } from '@/const/version';
 import { ModelProvider } from '@/libs/agent-runtime';
 import { aiProviderSelectors, useAiInfraStore } from '@/store/aiInfra';
@@ -11,6 +11,7 @@ import {
   OpenAICompatibleKeyVault,
 } from '@/types/user/settings';
 import { createJWT } from '@/utils/jwt';
+import { encrypt } from '@inquirer/password';
 
 export const getProviderAuthPayload = (
   provider: string,
@@ -116,5 +117,5 @@ export const createHeaderWithAuth = async (params?: AuthParams): Promise<Headers
   const token = await createAuthTokenWithPayload(payload);
 
   // eslint-disable-next-line no-undef
-  return { ...params?.headers, [LOBE_CHAT_AUTH_HEADER]: token };
+  return { ...params?.headers, [OIL_TUTOR_AUTH_HEADER]: token };
 };

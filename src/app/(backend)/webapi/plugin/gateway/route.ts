@@ -2,7 +2,7 @@ import { PluginRequestPayload } from '@lobehub/chat-plugin-sdk';
 import { createGatewayOnEdgeRuntime } from '@lobehub/chat-plugins-gateway';
 
 import { getAppConfig } from '@/config/app';
-import { LOBE_CHAT_AUTH_HEADER, OAUTH_AUTHORIZED, enableNextAuth } from '@/const/auth';
+import { LOBE_CHAT_AUTH_HEADER as OIL_TUTOR_AUTH_HEADER, OAUTH_AUTHORIZED, enableNextAuth } from '@/const/auth';
 import { LOBE_CHAT_TRACE_ID, TraceNameMap } from '@/const/trace';
 import { AgentRuntimeError } from '@/libs/agent-runtime';
 import { TraceClient } from '@/libs/traces';
@@ -40,7 +40,7 @@ const handler = createGatewayOnEdgeRuntime({ defaultPluginSettings, pluginsIndex
 
 export const POST = async (req: Request) => {
   // get Authorization from header
-  const authorization = req.headers.get(LOBE_CHAT_AUTH_HEADER);
+  const authorization = req.headers.get(OIL_TUTOR_AUTH_HEADER);
   if (!authorization) throw AgentRuntimeError.createError(ChatErrorType.Unauthorized);
 
   const oauthAuthorized = !!req.headers.get(OAUTH_AUTHORIZED);
